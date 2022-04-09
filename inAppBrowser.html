@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<!-- saved from url=(0050)index.html#imgLoading -->
+<html>
+		<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<script type="text/javascript" charset="utf-8" src="cordova.js"></script><meta name="viewport" content="initial-scale=1">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+		<meta name="apple-touch-fullscreen" content="yes" />
+
+		<link rel="apple-touch-icon" href="apple-touch-icon.png" />
+		<link rel="apple-touch-icon-precomposed" sizes="144x144" href="apple-touch-icon-144x144-precomposed.png" />
+		<link rel="apple-touch-icon-precomposed" sizes="114x114" href="apple-touch-icon-114x114-precomposed.png" />
+		<link rel="apple-touch-icon-precomposed" sizes="72x72" href="apple-touch-icon-72x72-precomposed.png" />
+		<link rel="apple-touch-icon-precomposed" sizes="57x57" href="apple-touch-icon-57x57-precomposed.png" />
+		<link rel="stylesheet" href="css/style.css">
+		<script src="jquery/jquery-1.11.3.min.js"></script>
+		<script src="js/mainUrl.js"></script>
+		<link rel="stylesheet" href="jquery/jquery.mobile-1.4.5.min.css">
+		<script src="jquery/jquery-1.11.3.min.js"></script>
+		<script src="jquery/jquery.mobile-1.4.5.min.js"></script>
+
+		<script>
+		
+			function openMenu(par)
+			{
+				window.open(par,"_blank");
+			}
+			
+		</script>
+		<style>
+			.fullSize
+			{
+				width : 90%;
+				position : relative;
+				left : 0%;
+			}
+			.oddCell
+			{
+				background-color : white;
+			}
+			
+			.evenCell
+			{
+				background-color : lightGray;
+			}
+			
+			.header
+			{
+				background-color : gray;
+				color : white;
+			}
+			
+			td 
+			{
+				direction: ltr;
+				margin:auto;
+				text-align:justify;
+				word-break: break-word;
+				white-space: pre-line;
+				overflow-wrap: break-word;
+				-ms-word-break: break-word;
+				word-break: break-word;
+				word-break: break-word;
+				-ms-hyphens: auto;
+				-moz-hyphens: auto;
+				-webkit-hyphens: auto;
+				hyphens: auto;			
+			}
+
+			table 
+			{ 
+				table-layout:fixed;
+				width:100%;
+			}
+		</style>
+			
+	</head>
+	<body class="ui-mobile-viewport ui-overlay-a" data-menu-position="closed" style="zoom: 1;">
+		<div id="imgLoading"></div>
+		<header class="main">
+		
+			<h1 class="logo"><a href="index.html" class="ss-list">Index</a></h1>
+			<a href="#menu" class="menu-trigger ss-icon">&#xED50;</a>
+			<nav><div w3-include-html="menu.html"></div></nav>
+		
+		</header>
+		<div class="content">
+			<section class="intro">
+				<ul data-role="listview" data-inset="true" data-split-theme="b" class="ui-listview ui-listview-inset ui-corner-all ui-shadow">
+					<br>
+					<li class="fullSize ui-li-static ui-body-inherit ui-last-child">
+						<label style="font-weight : bold; text-align: center">Data</label>
+						<div id="dataCustomer">
+							<table class="centerLabel" width="100%">
+								<tbody>
+									<tr class="header" >
+										<td width="15%" style="text-align:center;">No</td>
+										<td width="55%" style="text-align:center;">Judul</td>
+										<td width="30%" style="text-align:center;">Lihat</td>
+									</tr>
+									<tr class="oddCell">
+										<td style="text-align:center; vertical-align : middle">1</td>
+										<td style="text-align:center; vertical-align : middle">Part I</td>
+										<td style="text-align:center;"><input type="button" onclick="viewVideo(1);" value="View"></td>
+									</tr>
+									<tr class="evenCell">
+										<td style="text-align:center; vertical-align : middle">2</td>
+										<td style="text-align:center; vertical-align : middle">Part II</td>
+										<td style="text-align:center;"><input type="button" onclick="viewVideo(2);" value="View"></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</li>
+				</ul>
+			</section>
+		</div>
+		
+		<script>
+
+			includeHTML();
+			function viewVideo(idx)
+			{
+				if ( idx == 1 )
+				{
+					var ref = cordova.InAppBrowser.open('https://youtu.be/eQEHtpkXPcM', '_blank', 'location=no');
+				}else
+				{
+					var ref = cordova.InAppBrowser.open('https://youtu.be/M8aWXJtq_ZA', '_blank', 'location=yes');
+				}
+			}
+		</script>
+		
+		<script src="js/example-jRespond.min.js"></script>
+</body>
+</html>

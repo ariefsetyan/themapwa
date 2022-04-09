@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<script type="text/javascript" charset="utf-8" src="cordova.js"></script>
+		
+		<link rel="stylesheet" href="jquery/jquery.mobile-1.4.5.min.css">
+		<link rel="stylesheet" href="jquery/jquery.mobile-1.4.5.min.css">
+		<link rel="stylesheet" href="jquery/jquery-editable-select.min.css">
+		<link rel="stylesheet" href="css/animation.css">
+		<script src="jquery/jquery-1.11.3.min.js"></script>
+		<script src="jquery/jquery.mobile-1.4.5.min.js"></script>
+		<script src="jquery/jquery-editable-select.min.js"></script>
+		<style>
+		* { padding: 0; margin: 0; }
+			html, body, #fullheight {
+				height: 100%;
+			}
+		#fullheight {
+			min-height: 200px;
+		}
+	
+			
+	</style>
+		<script>
+			var db = null;
+
+			document.addEventListener('deviceready', 
+				function() 
+				{
+					db = window.sqlitePlugin.openDatabase({
+					name: 'my.db',
+					location: 'default',
+				});
+				
+			});
+		
+			setTimeout(logOut, 500);
+		
+			function logOut()
+			{									
+				db.transaction(function(tx) {
+					var query = "UPDATE logStatus SET status = ?1 WHERE username = ?2";
+					tx.executeSql( query, ['0', 'ferdian'], 
+					function(tx, res) {
+						alert("Anda sudah logout!!!");
+						window.open("index.html","_self");
+					},
+					function(tx, error) {
+						console.log('UPDATE error: ' + error.message);
+					});
+				});			
+			}
+		</script>
+	</head>
+	<body>
+		
+	</body>
+</html>

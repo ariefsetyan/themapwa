@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<script type="text/javascript" charset="utf-8" src="cordova.js"></script>
+		
+		<link rel="stylesheet" href="jquery/jquery.mobile-1.4.5.min.css">
+		<link rel="stylesheet" href="jquery/jquery.mobile-1.4.5.min.css">
+		<link rel="stylesheet" href="jquery/jquery-editable-select.min.css">
+		<link rel="stylesheet" href="css/animation.css">
+		<script src="jquery/jquery-1.11.3.min.js"></script>
+		<script src="jquery/jquery.mobile-1.4.5.min.js"></script>
+		<script src="jquery/jquery-editable-select.min.js"></script>
+		<style>
+		* { padding: 0; margin: 0; }
+			html, body, #fullheight {
+				height: 100%;
+			}
+		#fullheight {
+			min-height: 200px;
+		}
+	
+			
+	</style>
+		<script>
+			var db = null;
+			var newData = true;
+
+			document.addEventListener('deviceready', 
+				function() 
+				{
+					db = window.sqlitePlugin.openDatabase({
+					name: 'my.db',
+					location: 'default',
+				});
+				
+			});
+						
+			function login()
+			{
+				var username = document.getElementById("username").value;
+				var password = document.getElementById("password").value;
+				
+				db.transaction(function(tx) {
+					tx.executeSql('SELECT * FROM logStatus', [], function(tx, rs) {
+						//alert(JSON.stringify(rs.rows));
+						var valUsername = rs.rows.item(0).username;
+						var valPassword = rs.rows.item(0).password;
+						
+						if ( valUsername == username && valPassword == password )
+						{				
+							db.transaction(function(tx) {
+								var query = "UPDATE logStatus SET status = ?1 WHERE username = ?2";
+								tx.executeSql( query, ['1', 'ferdian'], 
+								function(tx, res) {
+									alert("Anda berhasil Login!!!");
+									window.open("index.html","_self");
+								},
+								function(tx, error) {
+									console.log('UPDATE error: ' + error.message);
+								});
+							});
+						}else
+						{
+							alert("Username / Password yang Anda masukan keliru  !!!..." + valPassword +"  " + valUsername);
+						}
+					}, function(tx, error) {
+							console.log('SELECT error: ' + error.message);
+						});
+					});
+			}
+		</script>
+	</head>
+	<body>
+		<div data-role="page" id="pageone"  class="dikBody">
+		<div  id="fullheight" style="width:120%; height:30%; position : relative; left : 0%; background-repeat : no-repeat; background-image:url('img/.jpg'); background-size:100% "></div>
+			<div data-role="main" >
+				<ul data-role="listview" data-inset="true" data-split-theme="b">
+					<li data-role="divider" data-theme="a"><a href="index.html">Login Latihan JagoAndroid</a></li>
+						<li>
+							<div>
+								
+								<label for="username">Username</label>
+								<input type="text" name="username" id="username">
+								<label for="password">Password</label>
+								<input type="password" name="password" id="password">
+								<input type="button" data-inline="true" value="Login" id="loginButton" onClick="login();">
+							</div>
+						</li>
+				</ul>
+			</div>
+		</div> 
+
+</body>
+</html>
